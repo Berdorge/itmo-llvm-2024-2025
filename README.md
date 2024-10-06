@@ -15,3 +15,9 @@ run
 ```sh
 make analyze-sdl
 ```
+Be aware that the script
+(located at `./SDL/stats/analyze.py`)
+used to plot instruction windows frequencies
+inside this `make` rule
+requires
+[`matplotlib`](https://matplotlib.org/) to be installed.

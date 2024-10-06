@@ -53,7 +53,7 @@ run-sdl-with-pass: $(SDL_WITH_PASS_OUTPUT)
 analyze-sdl:
 	$(MAKE) SDL_ITERATION_LIMIT=10 clean run-sdl-with-pass
 	SDL/stats/analyze.py
-	@echo "You may now find instruction windows analysis in SDL/stats folder."
+	@echo "You may now find instruction windows analysis in SDL/stats directory."
 
 clean:
 	rm -f $(SDL_OUTPUT) \

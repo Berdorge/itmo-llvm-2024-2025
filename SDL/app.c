@@ -17,7 +17,11 @@ void app()
     currently_alive[CENTER_Y][CENTER_X] = 1;
     currently_alive[CENTER_Y + 1][CENTER_X] = 1;
 
+#ifdef ITERATION_LIMIT
+    for (int i = 0; i < ITERATION_LIMIT; ++i)
+#else
     while (1)
+#endif
     {
         for (int y = 0; y < ZOOMED_Y_SIZE; ++y)
         {

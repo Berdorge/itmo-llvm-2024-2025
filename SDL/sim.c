@@ -24,14 +24,6 @@ void simInit()
 
 void simExit()
 {
-    SDL_Event event;
-    while (1)
-    {
-        if (SDL_PollEvent(&event) && event.type == SDL_QUIT)
-        {
-            break;
-        }
-    }
     SDL_DestroyRenderer(Renderer);
     SDL_DestroyWindow(Window);
     SDL_Quit();

@@ -1,0 +1,447 @@
+Instruction windows of length 3, from most frequent to least frequent:
+
+This window occurred 9 time(s):
+getelementptr <- load
+load <- icmp
+icmp <- zext
+
+This window occurred 7 time(s):
+load <- icmp
+icmp <- zext
+zext <- add
+
+This window occurred 6 time(s):
+icmp <- zext
+zext <- add
+add <- phi
+
+This window occurred 4 time(s):
+add <- phi
+getelementptr <- load
+load <- icmp
+
+This window occurred 3 time(s):
+getelementptr <- store
+getelementptr <- store
+getelementptr <- store
+
+This window occurred 2 time(s):
+zext <- add
+add <- phi
+icmp <- br
+
+This window occurred 2 time(s):
+trunc <- call
+lshr <- trunc
+trunc <- call
+
+This window occurred 2 time(s):
+trunc <- call
+load <- call
+load <- call
+
+This window occurred 2 time(s):
+lshr <- trunc
+trunc <- call
+lshr <- trunc
+
+This window occurred 2 time(s):
+load <- icmp
+icmp <- zext
+zext <- phi
+
+This window occurred 2 time(s):
+load <- call
+load <- call
+call <- store
+
+This window occurred 2 time(s):
+icmp <- br
+add <- phi
+getelementptr <- load
+
+This window occurred 2 time(s):
+icmp <- br
+add <- icmp
+icmp <- br
+
+This window occurred 2 time(s):
+getelementptr <- load
+load <- icmp
+icmp <- select
+
+This window occurred 2 time(s):
+add <- icmp
+icmp <- br
+add <- icmp
+
+This window occurred 2 time(s):
+add <- getelementptr
+getelementptr <- load
+load <- icmp
+
+This window occurred 1 time(s):
+zext <- store
+getelementptr <- store
+add <- icmp
+
+This window occurred 1 time(s):
+zext <- phi
+getelementptr <- load
+load <- icmp
+
+This window occurred 1 time(s):
+zext <- phi
+add <- phi
+lshr <- zext
+
+This window occurred 1 time(s):
+zext <- getelementptr
+lshr <- zext
+zext <- getelementptr
+
+This window occurred 1 time(s):
+zext <- getelementptr
+getelementptr <- load
+load <- icmp
+
+This window occurred 1 time(s):
+zext <- add
+add <- phi
+zext <- add
+
+This window occurred 1 time(s):
+zext <- add
+add <- phi
+getelementptr <- load
+
+This window occurred 1 time(s):
+zext <- add
+add <- phi
+add <- phi
+
+This window occurred 1 time(s):
+zext <- add
+add <- phi
+add <- getelementptr
+
+This window occurred 1 time(s):
+zext <- add
+add <- and
+getelementptr <- load
+
+This window occurred 1 time(s):
+zext <- add
+add <- add
+getelementptr <- load
+
+This window occurred 1 time(s):
+trunc <- call
+trunc <- call
+load <- call
+
+This window occurred 1 time(s):
+sub <- sub
+icmp <- br
+sub <- call
+
+This window occurred 1 time(s):
+sub <- call
+load <- call
+alloca <- getelementptr
+
+This window occurred 1 time(s):
+select <- zext
+zext <- store
+getelementptr <- store
+
+This window occurred 1 time(s):
+select <- call
+icmp <- br
+icmp <- br
+
+This window occurred 1 time(s):
+lshr <- zext
+zext <- getelementptr
+lshr <- zext
+
+This window occurred 1 time(s):
+lshr <- zext
+zext <- getelementptr
+getelementptr <- load
+
+This window occurred 1 time(s):
+lshr <- trunc
+trunc <- call
+trunc <- call
+
+This window occurred 1 time(s):
+load <- sub
+sub <- sub
+icmp <- br
+
+This window occurred 1 time(s):
+load <- icmp
+icmp <- select
+select <- call
+
+This window occurred 1 time(s):
+load <- icmp
+icmp <- select
+icmp <- select
+
+This window occurred 1 time(s):
+load <- icmp
+icmp <- phi
+getelementptr <- load
+
+This window occurred 1 time(s):
+load <- call
+load <- call
+call <- trunc
+
+This window occurred 1 time(s):
+load <- call
+call <- trunc
+trunc <- call
+
+This window occurred 1 time(s):
+load <- call
+call <- store
+call <- icmp
+
+This window occurred 1 time(s):
+load <- call
+call <- store
+add <- icmp
+
+This window occurred 1 time(s):
+load <- call
+alloca <- getelementptr
+alloca <- getelementptr
+
+This window occurred 1 time(s):
+icmp <- zext
+zext <- phi
+getelementptr <- load
+
+This window occurred 1 time(s):
+icmp <- zext
+zext <- phi
+add <- phi
+
+This window occurred 1 time(s):
+icmp <- zext
+zext <- add
+add <- add
+
+This window occurred 1 time(s):
+icmp <- select
+select <- zext
+zext <- store
+
+This window occurred 1 time(s):
+icmp <- select
+select <- call
+icmp <- br
+
+This window occurred 1 time(s):
+icmp <- select
+icmp <- select
+and <- icmp
+
+This window occurred 1 time(s):
+icmp <- select
+and <- icmp
+icmp <- select
+
+This window occurred 1 time(s):
+icmp <- phi
+getelementptr <- load
+load <- icmp
+
+This window occurred 1 time(s):
+icmp <- br
+sub <- call
+load <- call
+
+This window occurred 1 time(s):
+icmp <- br
+lshr <- trunc
+trunc <- call
+
+This window occurred 1 time(s):
+icmp <- br
+load <- call
+load <- call
+
+This window occurred 1 time(s):
+icmp <- br
+icmp <- br
+lshr <- trunc
+
+This window occurred 1 time(s):
+icmp <- br
+icmp <- br
+add <- getelementptr
+
+This window occurred 1 time(s):
+icmp <- br
+getelementptr <- load
+load <- icmp
+
+This window occurred 1 time(s):
+icmp <- br
+call <- sub
+load <- sub
+
+This window occurred 1 time(s):
+icmp <- br
+and <- br
+icmp <- br
+
+This window occurred 1 time(s):
+icmp <- br
+and <- br
+add <- getelementptr
+
+This window occurred 1 time(s):
+icmp <- br
+add <- getelementptr
+icmp <- br
+
+This window occurred 1 time(s):
+icmp <- and
+add <- getelementptr
+icmp <- br
+
+This window occurred 1 time(s):
+getelementptr <- store
+icmp <- and
+add <- getelementptr
+
+This window occurred 1 time(s):
+getelementptr <- store
+getelementptr <- store
+icmp <- and
+
+This window occurred 1 time(s):
+getelementptr <- store
+add <- icmp
+icmp <- br
+
+This window occurred 1 time(s):
+getelementptr <- load
+load <- icmp
+icmp <- phi
+
+This window occurred 1 time(s):
+call <- trunc
+trunc <- call
+load <- call
+
+This window occurred 1 time(s):
+call <- sub
+load <- sub
+sub <- sub
+
+This window occurred 1 time(s):
+call <- store
+call <- icmp
+icmp <- br
+
+This window occurred 1 time(s):
+call <- store
+add <- icmp
+icmp <- br
+
+This window occurred 1 time(s):
+call <- icmp
+icmp <- br
+call <- sub
+
+This window occurred 1 time(s):
+and <- icmp
+icmp <- select
+select <- zext
+
+This window occurred 1 time(s):
+and <- br
+icmp <- br
+add <- phi
+
+This window occurred 1 time(s):
+and <- br
+add <- getelementptr
+getelementptr <- load
+
+This window occurred 1 time(s):
+alloca <- getelementptr
+getelementptr <- store
+getelementptr <- store
+
+This window occurred 1 time(s):
+alloca <- getelementptr
+alloca <- getelementptr
+getelementptr <- store
+
+This window occurred 1 time(s):
+add <- phi
+zext <- add
+add <- and
+
+This window occurred 1 time(s):
+add <- phi
+lshr <- zext
+zext <- getelementptr
+
+This window occurred 1 time(s):
+add <- phi
+icmp <- br
+getelementptr <- load
+
+This window occurred 1 time(s):
+add <- phi
+icmp <- br
+and <- br
+
+This window occurred 1 time(s):
+add <- phi
+add <- phi
+getelementptr <- load
+
+This window occurred 1 time(s):
+add <- phi
+add <- getelementptr
+getelementptr <- load
+
+This window occurred 1 time(s):
+add <- icmp
+icmp <- br
+load <- call
+
+This window occurred 1 time(s):
+add <- icmp
+icmp <- br
+add <- phi
+
+This window occurred 1 time(s):
+add <- getelementptr
+icmp <- br
+icmp <- br
+
+This window occurred 1 time(s):
+add <- getelementptr
+icmp <- br
+and <- br
+
+This window occurred 1 time(s):
+add <- and
+getelementptr <- load
+load <- icmp
+
+This window occurred 1 time(s):
+add <- add
+getelementptr <- load
+load <- icmp
+

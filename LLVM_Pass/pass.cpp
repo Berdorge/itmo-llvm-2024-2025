@@ -82,7 +82,7 @@ struct MyModPass : public PassInfoMixin<MyModPass>
                             builder.CreateCall(terminateLoggerFunction, {});
                         }
                     }
-                    else if (strcmp(instruction.getOpcodeName(), "phi") != 0)
+                    else if (!dyn_cast<PHINode>(&instruction))
                     {
                         // Log the instruction along with all of its instruction users
                         builder.SetInsertPoint(&instruction);
@@ -116,7 +116,7 @@ struct MyModPass : public PassInfoMixin<MyModPass>
 
 PassPluginLibraryInfo getPassPluginInfo()
 {
-    const auto callback = [](PassBuilder& PB)
+    auto const callback = [](PassBuilder& PB)
     {
         PB.registerOptimizerLastEPCallback(
             [&](ModulePassManager& MPM, auto)

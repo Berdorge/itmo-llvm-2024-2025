@@ -1,13 +1,11 @@
 ## Conway's game of life simulation through SDL graphical app
-
-To build and launch the graphical app with
+In order to build and launch the graphical app with
 Conway's Game of Life simulation, run
 ```sh
 make run-sdl
 ```
 
 ## SDL graphical app instruction windows frequency analysis
-
 In order to analyze the SDL graphical app
 instruction windows frequencies
 through LLVM instrumented pass,
@@ -21,3 +19,20 @@ used to plot instruction windows frequencies
 inside this `make` rule
 requires
 [`matplotlib`](https://matplotlib.org/) to be installed.
+
+## Compiled SDL graphical app with generated sources
+In order to generate the LLVM IR of
+the SDL graphical app, then compile and launch it,
+run
+```sh
+make run-generated-sdl
+```
+
+## Interpreted SDL graphical app with generated sources
+In order to generate the LLVM IR of
+the SDL graphical app (without dumping it anywhere),
+then interpret it,
+run
+```sh
+make run-interpreted-sdl
+```

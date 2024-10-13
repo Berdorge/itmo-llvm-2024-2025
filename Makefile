@@ -1,7 +1,7 @@
-CC=clang
-
 SDL_CFLAGS=-lSDL2
 SDL_SOURCES=$(wildcard SDL/*.c)
+SDL_SIM_SOURCES=SDL/sim.c
+SDL_SOURCES_WITHOUT_APP=$(filter-out SDL/app.c, $(SDL_SOURCES))
 SDL_OUTPUT=SDL/sdl.out
 
 PASS_SOURCES=LLVM_Pass/pass.cpp
@@ -12,6 +12,11 @@ PASS_LOGGER_OUTPUT=LLVM_Pass/logger.o
 
 SDL_WITH_PASS_OUTPUT=SDL/sdlWithPass.out
 
+GENERATOR_SOURCES=SDL/IRGen/sdlAppGenerator.cpp
+GENERATOR_OUTPUT=SDL/IRGen/sdlAppGenerator.out
+SDL_GENERATED_SOURCES=SDL/appGenerated.ll
+SDL_GENERATED_OUTPUT=SDL/sdlGenerated.out
+
 ifeq ($(SDL_ITERATION_LIMIT),)
 	SDL_ITERATION_LIMIT_FLAG=
 else
@@ -19,7 +24,7 @@ else
 endif
 
 $(SDL_OUTPUT): $(SDL_SOURCES)
-	$(CC) $(SDL_SOURCES) -o $(SDL_OUTPUT) $(SDL_ITERATION_LIMIT_FLAG) $(SDL_CFLAGS) 
+	clang $(SDL_SOURCES) -o $(SDL_OUTPUT) $(SDL_ITERATION_LIMIT_FLAG) $(SDL_CFLAGS) 
 
 $(PASS_OUTPUT): $(PASS_SOURCES)
 	clang++ $(PASS_SOURCES) -fPIC -shared -I$(PASS_INCLUDE) -o $(PASS_OUTPUT)
@@ -34,7 +39,26 @@ $(SDL_WITH_PASS_OUTPUT): $(PASS_OUTPUT) $(SDL_SOURCES)
 		$(SDL_CFLAGS) \
 		$(PASS_LOGGER_OUTPUT) $(SDL_SOURCES)
 
-.PHONY: all sdl run-sdl pass sdl-with-pass run-sdl-with-pass analyze-sdl clean
+$(GENERATOR_OUTPUT): $(SDL_SIM_SOURCES) $(GENERATOR_SOURCES)
+	clang++ $(shell llvm-config --cppflags --ldflags --libs) \
+		$(SDL_SIM_SOURCES) $(GENERATOR_SOURCES) \
+		$(SDL_CFLAGS) \
+		-o $(GENERATOR_OUTPUT)
+
+$(SDL_GENERATED_SOURCES): $(GENERATOR_OUTPUT)
+	$(GENERATOR_OUTPUT) $(SDL_GENERATED_SOURCES)
+
+$(SDL_GENERATED_OUTPUT): $(SDL_SOURCES_WITHOUT_APP) $(SDL_GENERATED_SOURCES)
+	clang $(SDL_SOURCES_WITHOUT_APP) $(SDL_GENERATED_SOURCES) \
+		-o $(SDL_GENERATED_OUTPUT) \
+		$(SDL_ITERATION_LIMIT_FLAG) \
+		$(SDL_CFLAGS) 
+
+.PHONY: all
+.PHONY: sdl run-sdl
+.PHONY: pass sdl-with-pass run-sdl-with-pass analyze-sdl
+.PHONY: generator run-generator generated-sdl run-generated-sdl run-interpreted-sdl
+.PHONY: clean
 
 all: $(SDL_OUTPUT) $(SDL_WITH_PASS_OUTPUT)
 
@@ -55,8 +79,23 @@ analyze-sdl:
 	SDL/stats/analyze.py
 	@echo "You may now find instruction windows analysis in SDL/stats directory."
 
+generator: $(GENERATOR_OUTPUT)
+
+run-generator: $(SDL_GENERATED_SOURCES)
+
+generated-sdl: $(SDL_GENERATED_OUTPUT)
+
+run-generated-sdl: $(SDL_GENERATED_OUTPUT)
+	$(SDL_GENERATED_OUTPUT)
+
+run-interpreted-sdl: $(GENERATOR_OUTPUT)
+	$(GENERATOR_OUTPUT)
+
 clean:
 	rm -f $(SDL_OUTPUT) \
 		$(PASS_OUTPUT) \
 	 	$(PASS_LOGGER_OUTPUT) \
-		$(SDL_WITH_PASS_OUTPUT)
+		$(SDL_WITH_PASS_OUTPUT) \
+		$(GENERATOR_OUTPUT) \
+		$(SDL_GENERATED_SOURCES) \
+		$(SDL_GENERATED_OUTPUT)

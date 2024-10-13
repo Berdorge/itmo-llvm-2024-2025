@@ -113,7 +113,7 @@ PenaltyExcessCharacter: 1000000
 PenaltyReturnTypeOnItsOwnLine: 60
 PointerAlignment: Left
 QualifierAlignment: Custom
-QualifierOrder: ['friend', 'inline', 'static', 'constexpr', 'const', 'volatile', 'type']
+QualifierOrder: ['friend', 'inline', 'static', 'constexpr', 'volatile', 'type', 'const']
 ReferenceAlignment: Pointer
 ReflowComments: true
 RemoveBracesLLVM: false

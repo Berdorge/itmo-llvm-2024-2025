@@ -17,6 +17,12 @@ GENERATOR_OUTPUT=SDL/IRGen/sdlAppGenerator.out
 SDL_GENERATED_SOURCES=SDL/appGenerated.ll
 SDL_GENERATED_OUTPUT=SDL/sdlGenerated.out
 
+ASM_SOURCES=SDL/IRGen/app.s
+EMULATED_ASM_IRGEN_SOURCES=SDL/IRGen/emulatedAsmIRGen.cpp
+EMULATED_ASM_IRGEN_OUTPUT=SDL/IRGen/emulatedAsmIRGen.out
+ASM_IRGEN_SOURCES=SDL/IRGen/asmIRGen.cpp
+ASM_IRGEN_OUTPUT=SDL/IRGen/asmIRGen.out
+
 ifeq ($(SDL_ITERATION_LIMIT),)
 	SDL_ITERATION_LIMIT_FLAG=
 else
@@ -54,10 +60,24 @@ $(SDL_GENERATED_OUTPUT): $(SDL_SOURCES_WITHOUT_APP) $(SDL_GENERATED_SOURCES)
 		$(SDL_ITERATION_LIMIT_FLAG) \
 		$(SDL_CFLAGS) 
 
+$(EMULATED_ASM_IRGEN_OUTPUT): $(EMULATED_ASM_IRGEN_SOURCES) $(ASM_SOURCES)
+	clang++ --std=c++20 -g -O0 $(shell llvm-config --cppflags --ldflags --libs) \
+		$(EMULATED_ASM_IRGEN_SOURCES) $(SDL_SIM_SOURCES) \
+		$(SDL_CFLAGS) \
+		-o $(EMULATED_ASM_IRGEN_OUTPUT)
+
+$(ASM_IRGEN_OUTPUT): $(ASM_IRGEN_SOURCES) $(ASM_SOURCES)
+	clang++ --std=c++20 -g -O0 $(shell llvm-config --cppflags --ldflags --libs) \
+		$(ASM_IRGEN_SOURCES) $(SDL_SIM_SOURCES) \
+		$(SDL_CFLAGS) \
+		-o $(ASM_IRGEN_OUTPUT)
+
 .PHONY: all
 .PHONY: sdl run-sdl
 .PHONY: pass sdl-with-pass run-sdl-with-pass analyze-sdl
 .PHONY: generator run-generator generated-sdl run-generated-sdl run-interpreted-sdl
+.PHONY: emulated-asm run-emulated-asm
+.PHONY: asm run-asm
 .PHONY: clean
 
 all: $(SDL_OUTPUT) $(SDL_WITH_PASS_OUTPUT)
@@ -91,6 +111,16 @@ run-generated-sdl: $(SDL_GENERATED_OUTPUT)
 run-interpreted-sdl: $(GENERATOR_OUTPUT)
 	$(GENERATOR_OUTPUT)
 
+emulated-asm: $(EMULATED_ASM_IRGEN_OUTPUT)
+
+run-emulated-asm: $(EMULATED_ASM_IRGEN_OUTPUT)
+	$(EMULATED_ASM_IRGEN_OUTPUT) $(ASM_SOURCES)
+
+asm: $(ASM_IRGEN_OUTPUT)
+
+run-asm: $(ASM_IRGEN_OUTPUT)
+	$(ASM_IRGEN_OUTPUT) $(ASM_SOURCES)
+
 clean:
 	rm -f $(SDL_OUTPUT) \
 		$(PASS_OUTPUT) \
@@ -98,4 +128,6 @@ clean:
 		$(SDL_WITH_PASS_OUTPUT) \
 		$(GENERATOR_OUTPUT) \
 		$(SDL_GENERATED_SOURCES) \
-		$(SDL_GENERATED_OUTPUT)
+		$(SDL_GENERATED_OUTPUT) \
+		$(EMULATED_ASM_IRGEN_OUTPUT) \
+		$(ASM_IRGEN_OUTPUT) \

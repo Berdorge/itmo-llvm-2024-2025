@@ -36,3 +36,19 @@ run
 ```sh
 make run-interpreted-sdl
 ```
+
+## Interpreted SDL graphical app with sources generated from SARCH assembly
+In order to generate the LLVM IR of
+the SDL graphical app from SARCH assembly sources,
+then interpret it,
+run
+```sh
+make run-emulated-asm
+```
+or
+```sh
+make run-asm
+```
+The former generates bytecode with all SARCH instructions emulated,
+while the latter generates direct IR instructions and
+emulates only register access.
